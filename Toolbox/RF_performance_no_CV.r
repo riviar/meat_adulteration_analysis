@@ -22,7 +22,7 @@
 # Rafal Kural
 #####################################################
 
-RF_performance <- function(X, CLASS, ratio, iterations, allowedDeviation) {
+RF_performance_no_CV <- function(X, CLASS, ratio, iterations, allowedDeviation) {
   require(randomForest)
   source("../../Toolbox/randomize_sets.r")
   
