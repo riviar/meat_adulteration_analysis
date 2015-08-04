@@ -122,7 +122,7 @@ foreach(i = 1:5) %dopar% {
   } else if (i == 4) {
     #RF analysis
     RFresults <- RF_performance_no_CV(X = X, CLASS = CLASS, ratio = dataSplitRatio, iterations = iterations, 
-                                allowedDeviation = allowedRegrScoreDeviation, crossval = crossValFoldRF)
+                                allowedDeviation = allowedRegrScoreDeviation)
   } else if (i == 5) {
     #PLS-R analysis
     PLSRresults <- PLSR_performance(X = X, CLASS = CLASS, ratio = dataSplitRatio, maxncomp = maxncomp,
