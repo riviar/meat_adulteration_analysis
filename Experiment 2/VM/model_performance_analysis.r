@@ -44,7 +44,8 @@ source("../../Toolbox/PLSDA_performance.r")
 source("../../Toolbox/PLSR_performance.r")
 source("../../Toolbox/SVM_performance.r")
 source("../../Toolbox/RF_performance.r")
-#source("generate_performance_plot.r")
+source("../../Toolbox/generate_plots.r")
+source("../../Toolbox/save_results_csv.r")
 
 ####### ANALYSIS SETTINGS ###########
 # ratio of training-to-testing set (0.75 recommended)
@@ -100,8 +101,9 @@ CLASS <- DATA$CLASS
 ####### ANALYSIS MAIN BODY ###########
 # number of CPU cores to use
 #registerDoMC(5)
+
 # little hack to run separate algorithms in parallel
-foreach(i = 1:5) %do% {
+foreach(i = 1:2) %do% {
   if(i == 1) {
     #SVM polynomial analysis
     SVMpolynResults <- SVM_performance(X = X, CLASS = CLASS, ratio = dataSplitRatio, krnl = "polynomial",
@@ -127,5 +129,16 @@ foreach(i = 1:5) %do% {
                                     iterations = iterations, allowedDeviation = allowedRegrScoreDeviation)
   }
 }
-# generate plot and raw data files
 ####### ANALYSIS MAIN BODY END ########
+
+####### GENERATE PLOTS ################
+# vector with analysis data names
+algorithmNames <- c("SVM Polynomial", "SVM Radial")
+# push all analysis results into a list
+resultsList <- list(SVMpolynResults, SVMradialResults)
+generate_plots(datasets = resultsList, datasetsNames = algorithmNames)
+####### GENERATE PLOTS END ############
+
+####### SAVE ALL RESULTS ##############
+save_results_csv(datasets = resultsList, datasetsNames = algorithmNames)
+####### SAVE ALL RESULTS END ##########
