@@ -86,9 +86,9 @@ maxncomp <- 40
 ####### MODELS SETTINGS END #########
 
 ####### LOAD DATA ###################
-fileToLoad = "Exp2_VM.csv"
+fileToLoad = "Exp2_HPLC.csv"
 #name of the data that will appear in result file name
-dataName = "Exp2_VM"
+dataName = "Exp2_HPLC"
 
 # load chosen file
 DATA <- load_data_from_file(fileToLoad)

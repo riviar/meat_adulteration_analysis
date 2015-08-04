@@ -57,10 +57,10 @@ iterations = 100
 # allows prediction of class adjecent to observed to be treated as correct result
 # classification models only
 # (TRUE recommended if many classes are present)
-allowClassProximity = TRUE
+allowClassProximity = FALSE
 
 # allowed score deviation for regression models to consider prediction to be correct
-allowedRegrScoreDeviation = 10
+allowedRegrScoreDeviation = 0.5
 ####### ANALYSIS SETTINGS END #######
 
 ####### MODELS SETTINGS #############
@@ -86,9 +86,9 @@ maxncomp <- 40
 ####### MODELS SETTINGS END #########
 
 ####### LOAD DATA ###################
-fileToLoad = "Exp2_VM.csv"
+fileToLoad = "Exp1_VM.csv"
 #name of the data that will appear in result file name
-dataName = "Exp2_VM"
+dataName = "Exp1_VM"
 
 # load chosen file
 DATA <- load_data_from_file(fileToLoad)

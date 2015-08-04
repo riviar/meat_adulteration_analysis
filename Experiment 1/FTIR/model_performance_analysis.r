@@ -43,7 +43,7 @@ source("../../Toolbox/load_data_from_file.r")
 source("../../Toolbox/PLSDA_performance.r")
 source("../../Toolbox/PLSR_performance.r")
 source("../../Toolbox/SVM_performance.r")
-source("../../Toolbox/RF_performance.r")
+source("../../Toolbox/RF_performance_no_CV.r")
 source("../../Toolbox/generate_plots.r")
 source("../../Toolbox/save_results_csv.r")
 
@@ -57,10 +57,10 @@ iterations = 100
 # allows prediction of class adjecent to observed to be treated as correct result
 # classification models only
 # (TRUE recommended if many classes are present)
-allowClassProximity = TRUE
+allowClassProximity = FALSE
 
 # allowed score deviation for regression models to consider prediction to be correct
-allowedRegrScoreDeviation = 10
+allowedRegrScoreDeviation = 0.5
 ####### ANALYSIS SETTINGS END #######
 
 ####### MODELS SETTINGS #############
@@ -86,9 +86,9 @@ maxncomp <- 40
 ####### MODELS SETTINGS END #########
 
 ####### LOAD DATA ###################
-fileToLoad = "Exp2_VM.csv"
+fileToLoad = "Exp1_FTIR.csv"
 #name of the data that will appear in result file name
-dataName = "Exp2_VM"
+dataName = "Exp1_FTIR"
 
 # load chosen file
 DATA <- load_data_from_file(fileToLoad)
@@ -121,7 +121,7 @@ foreach(i = 1:5) %dopar% {
                                       crossval = crossValFoldPLSDA)
   } else if (i == 4) {
     #RF analysis
-    RFresults <- RF_performance(X = X, CLASS = CLASS, ratio = dataSplitRatio, iterations = iterations, 
+    RFresults <- RF_performance_no_CV(X = X, CLASS = CLASS, ratio = dataSplitRatio, iterations = iterations, 
                                 allowedDeviation = allowedRegrScoreDeviation, crossval = crossValFoldRF)
   } else if (i == 5) {
     #PLS-R analysis
